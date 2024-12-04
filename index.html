@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação de Slides</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<style>
+    /* Estilo do corpo */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background: linear-gradient(45deg, #a1c4fd, #c2e9fb, #a1c4fd, #c2e9fb);
+        background-size: 200% 200%;
+        animation: gradientAnimation 10s ease infinite;
+    }
+
+    /* Animação do fundo de gradiente */
+    @keyframes gradientAnimation {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    /* Estilo do container dos slides */
+    #slides-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Estilo dos slides */
+    .slide {
+        display: none;
+        padding: 20px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 900px;
+        height: auto;
+        text-align: center;
+    }
+
+    /* Slide ativo */
+    .slide.active {
+        display: block;
+    }
+
+    /* Estilo dos botões */
+    .buttons-container {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 10;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        background-color: #333;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        animation: rainbow 5s infinite;
+    }
+
+    button:hover {
+        background-color: #555;
+    }
+
+    /* Definição da animação arco-íris para os botões */
+    @keyframes rainbow {
+        0% {
+            background-color: #FF0000;
+        }
+
+        14% {
+            background-color: #FF7F00;
+        }
+
+        28% {
+            background-color: #FFFF00;
+        }
+
+        42% {
+            background-color: #00FF00;
+        }
+
+        57% {
+            background-color: #0000FF;
+        }
+
+        71% {
+            background-color: #4B0082;
+        }
+
+        85% {
+            background-color: #9400D3;
+        }
+
+        100% {
+            background-color: #FF0000;
+        }
+    }
+
+    h1 {
+        color: blueviolet;
+        font-size: 30px;
+        font-family: 'Times New Roman', Times, serif;
+        margin: 20px 0;
+    }
+
+    h2 {
+        color: #333;
+        font-size: 24px;
+    }
+
+    p,
+    li {
+        font-size: 18px;
+        color: #555;
+    }
+
+    /* Estilo para a lista dentro dos slides */
+    ul {
+        padding-left: 20px;  /* Adiciona um pequeno espaço à esquerda */
+        text-align: left; /* Garante que os itens da lista sejam alinhados à esquerda */
+    }
+
+    li {
+        margin-bottom: 10px; /* Espaçamento entre os itens */
+    }
+</style>
+
+<body>
+
+    <div id="slides-container">
+        <section class="slide active">
+            <h1>Testes Unitários</h1>
+            <h2>O que é um Teste Unitário?</h2>
+            <p>Um teste unitário é uma técnica de desenvolvimento de software em que pequenas partes do código
+                (geralmente chamadas de unidades) são testadas isoladamente para garantir que funcionam como esperado.
+            </p>
+        </section>
+
+        <section class="slide">
+            <h1>Características principais de um Teste Unitário:</h1>
+            <ul>
+                <li><strong>Isolamento:</strong> Testa apenas uma funcionalidade ou componente específico.</li>
+                <li><strong>Automação:</strong> Deve ser possível rodar o teste automaticamente, sem intervenção manual.</li>
+                <li><strong>Previsibilidade:</strong> Um teste unitário bem escrito sempre retorna o mesmo resultado
+                    para os mesmos dados de entrada.</li>
+                <li><strong>Foco:</strong> Verifica apenas o comportamento esperado de uma unidade do sistema.</li>
+            </ul>
+        </section>
+
+        <section class="slide">
+            <h1>Etapas do teste Unitário</h1>
+            <ul>
+                <li><strong>Preparação:</strong> Configura o ambiente para o teste, criando dados ou simulando componentes.</li>
+                <li><strong>Execução:</strong> Chama a unidade de código sendo testada, com entradas específicas.</li>
+                <li><strong>Validação:</strong> Compara o resultado obtido com o esperado.</li>
+            </ul>
+        </section>
+
+        <section class="slide">
+            <h1>Exemplo</h1>
+            <p><a href="test.html"><button>Html+Js</button></a></p>
+        </section>
+        <section class="slide">
+            <h1>Obrigado pela atenção!</h1>
+            <p></p>
+        </section>
+        <section class="slide">
+            <h1>Conclusão</h1>
+            <p>Obrigado pela atenção!</p>
+        </section>
+    </div>
+
+    <div class="buttons-container">
+        <button id="prevBtn" onclick="navigateSlides(-1)">Anterior</button>
+        <button id="nextBtn" onclick="navigateSlides(1)">Próximo</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;  // Índice do slide atual
+        const slides = document.querySelectorAll('.slide');  // Todos os slides
+
+        // Função para navegar entre os slides
+        function navigateSlides(direction) {
+            // Remover a classe "active" do slide atual
+            slides[currentSlideIndex].classList.remove('active');
+
+            // Atualizar o índice do slide
+            currentSlideIndex += direction;
+
+            // Se o índice for menor que 0 ou maior que o número de slides, ajustar
+            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+
+            // Adicionar a classe "active" ao novo slide
+            slides[currentSlideIndex].classList.add('active');
+        }
+
+        // Função de controle por teclado
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                navigateSlides(1);
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                navigateSlides(-1);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
